@@ -6,6 +6,8 @@ package_path = ./out/package
 package_version = $(package_path)/$(version)
 platforms = windows-amd64 linux-amd64 windows-386 linux-386
 
+export GO111MODULE=on
+
 package: $(platforms)
 
 clean:
@@ -14,20 +16,20 @@ clean:
 	rm -f coverage.txt coverage.html
 
 test:
-	GO111MODULE=on go test -v ./...
+	go test -v ./...
 
 test-godel:
-	GO111MODULE=on ./godelw test
+	./godelw test
 
 coverage:
-	GO111MODULE=on go test -race -coverprofile=coverage.txt -covermode=atomic ./...
-	GO111MODULE=on go tool cover -html=coverage.txt -o coverage.html
+	go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+	go tool cover -html=coverage.txt -o coverage.html
 
 release: clean package
 	ghr $(version) $(package_path)
 
 build:
-	GO111MODULE=on ./godelw build
+	./godelw build
 
 $(platforms): build
 	$(eval package_bin = $(package_version)/$@/bin)
