@@ -14,20 +14,20 @@ clean:
 	rm -f coverage.txt coverage.html
 
 test:
-	go test -v ./...
+	GO111MODULE=on go test -v ./...
 
 test-godel:
-	./godelw test
+	GO111MODULE=on ./godelw test
 
 coverage:
-	go test -race -coverprofile=coverage.txt -covermode=atomic ./...
-	go tool cover -html=coverage.txt -o coverage.html
+	GO111MODULE=on go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+	GO111MODULE=on go tool cover -html=coverage.txt -o coverage.html
 
 release: clean package
 	ghr $(version) $(package_path)
 
 build:
-	./godelw build
+	GO111MODULE=on ./godelw build
 
 $(platforms): build
 	$(eval package_bin = $(package_version)/$@/bin)
