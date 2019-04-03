@@ -36,6 +36,12 @@ make release
 ## Individual Commands
 When developing it may be desirable to build a single command rather than the entire project. There are a few ways of doing this. Choose the one appropriate for you.
 
+### Go Module Configuration
+Because this project uses Go Modules for dependencies, before performing individual builds execute the following to trigger proper functionality if this project was placed in a Go Workspace, or run it anyway if you're not sure what this means.
+```
+export GO111MODULE=1
+```
+
 ### Gödel
 The `Makefile` uses Gödel for building so this method is much like the `Makefile` method.
 
